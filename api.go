@@ -21,6 +21,8 @@ func main() {
 		}
 	}()
 
+	//time.Sleep(time.Minute)
+
 	o := &cluster.Options{
 		Name:     "dev",
 		IaasType: "openstack",

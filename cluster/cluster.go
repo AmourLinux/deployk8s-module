@@ -3,8 +3,8 @@ package cluster
 import (
 	"encoding/json"
 	"errors"
-	"github.com/amourlinux/deployk8s-module/factory"
 	"github.com/amourlinux/deployk8s-module/iaas"
+	"github.com/amourlinux/deployk8s-module/iaas/factory"
 	"k8s.io/klog"
 )
 
@@ -13,7 +13,12 @@ var y iaas.Iaas
 
 func init() {
 	x = factory.New("openstack")
+	x.WaitForSync()
+	klog.Infoln("Openstack sync succeed")
+
 	y = factory.New("aws")
+	y.WaitForSync()
+	klog.Infoln("Aws sync succeed")
 }
 
 type Cluster struct {
@@ -31,7 +36,7 @@ func New(o *Options) *Cluster {
 }
 
 type Options struct {
-	Name string
+	Name     string
 	IaasType string
 }
 

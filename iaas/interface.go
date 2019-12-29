@@ -3,7 +3,7 @@ package iaas
 type Iaas interface {
 	CreateLB() (LB, error)
 	CreateServer() (Server, error)
-	//WaitForSync()
+	WaitForSync()
 	//UpdateLBForAddUpstream()
 }
 
@@ -15,4 +15,3 @@ type LB interface {
 type Server interface {
 	GetServerAddress() string
 }
-
