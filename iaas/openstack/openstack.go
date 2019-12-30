@@ -2,6 +2,8 @@ package openstack
 
 import (
 	"github.com/amourlinux/deployk8s-module/iaas"
+	"github.com/amourlinux/deployk8s-module/merr"
+	"golang.org/x/xerrors"
 	"time"
 )
 
@@ -14,6 +16,10 @@ func New(addr string) *Openstack {
 }
 
 func (o *Openstack) CreateLB() (iaas.LB, error) {
+	return nil, xerrors.Errorf("%w", merr.ErrConnectIaas)
+	//return nil, merr.ErrConnectIaas
+	//return nil, xerrors.New("failed to connect iaas")
+
 	return &LB{
 		Addr: "127.0.0.1",
 		port: "6443",

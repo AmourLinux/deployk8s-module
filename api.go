@@ -31,7 +31,8 @@ func main() {
 	c := cluster.New(o)
 	err := c.Init()
 	if err != nil {
-		panic(err)
+		klog.Errorf("Failed to init cluster: %v", err)
+		klog.Fatalf("Failed to init cluster: %+v", err)
 	}
 
 	//return c

@@ -2,9 +2,10 @@ package cluster
 
 import (
 	"encoding/json"
-	"errors"
 	"github.com/amourlinux/deployk8s-module/iaas"
 	"github.com/amourlinux/deployk8s-module/iaas/factory"
+	"github.com/amourlinux/deployk8s-module/merr"
+	"golang.org/x/xerrors"
 	"k8s.io/klog"
 )
 
@@ -48,12 +49,13 @@ func (c *Cluster) Init() error {
 	case "aws":
 		i = y
 	default:
-		return errors.New("invalidate iaas type")
+		return merr.ErrInvalidIaasType
 	}
 
 	lb, err := i.CreateLB()
 	if err != nil {
-		return err
+		//return err
+		return xerrors.Errorf("create lb failed: %w", err)
 	}
 	klog.V(4).Infof("%+v", lb)
 	data, _ := json.Marshal(lb)
