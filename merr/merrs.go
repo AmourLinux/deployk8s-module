@@ -25,6 +25,8 @@ var (
 )
 
 func main() {
+	xerrors.FormatError()
+	fmt.Printf()
 	//xerrors.Formatter()
 	//xerrors.FormatError()
 	e1 := xerrors.Errorf("http error: %w", ErrConnectIaas)
